@@ -95,10 +95,7 @@ public class ServerProvider {
                         System.out.println("ServerProvider receive cmd nonsupport; cmd:" + cmd + "\tport:" + port);
                     }
                 }
-            } catch (SocketException e) {
-                e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace();
             } finally {
                 close();
             }

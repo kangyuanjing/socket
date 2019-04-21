@@ -1,7 +1,7 @@
 package server;
 
-import clink.net.qiujuer.clink.utils.ByteUtils;
 import constants.UDPConstants;
+import clink.net.qiujuer.clink.utils.ByteUtils;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * @version 1.0
  * @date 2019-04-17 21:15
  */
-public class ServerProvider {
+public class UDPProvider {
     private static Provider PROVIDER_INSTANCE;
 
     static void start(int port) {

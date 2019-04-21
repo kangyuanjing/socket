@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @date 2019-04-18 21:45
  */
-public class ClientSearcher {
+public class UDPSearcher {
     private static final int LISTEN_PORT = UDPConstants.PORT_CLIENT_RESPONSE;
 
     public static ServerInfo searchServer(int timeout) {

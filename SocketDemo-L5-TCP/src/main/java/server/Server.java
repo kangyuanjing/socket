@@ -12,12 +12,20 @@ import java.io.IOException;
 public class Server {
 
     public static void main(String[] args) {
-        ServerProvider.start(TCPConstants.POST_SERVER);
+        TCPServer tcpServer = new TCPServer(TCPConstants.POST_SERVER);
+        boolean isSucceed = tcpServer.start();
+        if(!isSucceed){
+            System.out.println("start TCP server failed");
+            return;
+        }
+
+        UDPProvider.start(TCPConstants.POST_SERVER);
         try {
             System.in.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ServerProvider.stop();
+        UDPProvider.stop();
+        tcpServer.stop();
     }
 }

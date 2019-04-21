@@ -1,4 +1,4 @@
-package utils;
+package clink.net.qiujuer.clink.utils;
 
 /**
  * @author kangyuanjing

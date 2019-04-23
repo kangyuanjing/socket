@@ -11,5 +11,16 @@
 
     <artifactId>sample-server</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>net.qiujuer.lesson</groupId>
+            <artifactId>lib-clink</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.qiujuer.lesson</groupId>
+            <artifactId>sample-foo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

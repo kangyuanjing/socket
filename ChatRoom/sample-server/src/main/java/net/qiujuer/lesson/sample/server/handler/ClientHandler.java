@@ -16,14 +16,21 @@ public class ClientHandler {
     private final Socket socket;
     private final ClientReadHandler readHandler;
     private final ClientWriteHandler writeHandler;
-    private final CloseNotify closeNotify;
+    private final ClientHandlerCallback clientHandlerCallback;
+    private final String clientInfo;
 
-    public ClientHandler(Socket socket, CloseNotify closeNotify) throws IOException {
+    public ClientHandler(Socket socket, ClientHandlerCallback clientHandlerCallback) throws IOException {
         this.socket = socket;
         this.readHandler = new ClientReadHandler(socket.getInputStream());
         this.writeHandler = new ClientWriteHandler(socket.getOutputStream());
-        this.closeNotify = closeNotify;
-        System.out.println("新客户端连接：" + socket.getInetAddress() + "\tport：" + socket.getPort());
+        this.clientHandlerCallback = clientHandlerCallback;
+        this.clientInfo = "A[" + socket.getInetAddress().getHostAddress()
+                + "] P[" + socket.getPort() + "]";
+        System.out.println("新客户端连接：" + clientInfo);
+    }
+
+    public String getClientInfo(){
+        return clientInfo;
     }
 
     public void exit() {
@@ -43,11 +50,15 @@ public class ClientHandler {
 
     private void exitBySelf(){
         exit();
-        closeNotify.onSelfClosed(this);
+        clientHandlerCallback.onSelfClosed(this);
     }
 
-    public interface CloseNotify{
+    public interface ClientHandlerCallback {
+        // 自身关闭通知
         void onSelfClosed(ClientHandler handler);
+
+        // 收到消息通知
+        void onNewMessageArrived(ClientHandler handler, String msg);
     }
 
     class ClientReadHandler extends Thread{
@@ -75,6 +86,7 @@ public class ClientHandler {
                         break;
                     }
                     System.out.println(str);
+                    clientHandlerCallback.onNewMessageArrived(ClientHandler.this, str);
                 } while (!done);
 
             } catch (IOException e) {
@@ -111,6 +123,9 @@ public class ClientHandler {
         }
 
         void send(String str){
+            if(done) {
+                return;
+            }
             executorService.execute(new writeRunnable(str));
         }
 

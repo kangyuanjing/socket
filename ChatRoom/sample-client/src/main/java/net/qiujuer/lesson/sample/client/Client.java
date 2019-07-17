@@ -22,6 +22,7 @@ public class Client {
                 if(tcpClient == null){
                     return;
                 }
+                write(tcpClient);
             } catch (IOException e) {
                 e.printStackTrace();
             }finally {

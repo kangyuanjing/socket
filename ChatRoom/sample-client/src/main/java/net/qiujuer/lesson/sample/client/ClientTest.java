@@ -22,7 +22,7 @@ public class ClientTest {
         }
         int size = 0;
         final ArrayList<TCPClient> tcpClients = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             try {
                 TCPClient tcpClient = TCPClient.startWith(info);
                 if(tcpClient == null){
@@ -55,6 +55,7 @@ public class ClientTest {
         });
         thread.start();
         System.in.read();
+        System.out.println("2");
         done = true;
         try {
             thread.join();

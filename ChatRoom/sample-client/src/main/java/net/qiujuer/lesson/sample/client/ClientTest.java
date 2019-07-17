@@ -9,12 +9,6 @@ import java.util.ArrayList;
  * @author kangyuanjing
  * @version 1.0
  * @date 2019-05-04 15:59
- *
- *
- *
- *
- *
- *
  */
 public class ClientTest {
     private static boolean done;
